@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joël Landry KANA - CV Interactif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --marine-blue: #003d5c;
+            --light-blue: #0066a1;
+            --accent-blue: #00a8e8;
+            --light-bg: #f0f8ff;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--marine-blue), var(--light-blue));
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--marine-blue), var(--light-blue));
+            color: var(--white);
+            padding: 150px 2rem 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .location {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--marine-blue);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-blue);
+        }
+
+        /* About Section */
+        .about-content {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--accent-blue);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid var(--white);
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-right: 15px solid var(--white);
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent-blue);
+            border: 4px solid var(--white);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--light-blue);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot,
+        .timeline-item:nth-child(even) .timeline-dot {
+            top: 30%;
+        }
+
+        .timeline-year {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            color: var(--marine-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: var(--light-blue);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .timeline-description ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .timeline-description li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .timeline-description li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .experience-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 61, 92, 0.2);
+        }
+
+        .experience-card h3 {
+            color: var(--marine-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-card .company {
+            color: var(--light-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-card .period {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-card li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .experience-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 61, 92, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--light-blue), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-card h3 {
+            color: var(--marine-blue);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: var(--light-bg);
+            color: var(--marine-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+        }
+
+        .skill-category h3 {
+            color: var(--marine-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .skill-bar {
+            background: var(--light-bg);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            background: linear-gradient(90deg, var(--light-blue), var(--accent-blue));
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--marine-blue);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--marine-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding: 0 0 0 2rem;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                display: none;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div>Kana Tsimi</div>
+            <div>
+                <a href="#about">À propos</a>
+                <a href="#timeline">Parcours</a>
+                <a href="#experience">Expérience</a>
+                <a href="#projects">Projets</a>
+                <a href="#skills">Compétences</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Kana Tsimi</h1>
+        <p class="tagline">International Recruitment | Executive Search | Talent Acquisition</p>
+        <p class="location">🌍 Dakar - Paris - Dubai | 🎓 Network Admin ➔ Tech Recruiter</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container">
+        <h2 class="section-title">À Propos</h2>
+        <div class="about-content">
+            <p>
+                Chasseur de têtes spécialisé dans le recrutement international avec <strong>3 ans d'expérience</strong> 
+                sur des marchés dynamiques en <strong>Europe, Asie et Amérique</strong> (France, Pays-Bas, Angleterre, USA, UAE).
+            </p>
+            <p style="margin-top: 1rem;">
+                Mon parcours unique : formé en <strong>Administration Réseaux et Systèmes</strong>, j'ai su combiner 
+                mon expertise technique avec mes compétences en ressources humaines pour devenir un recruteur spécialisé 
+                dans les profils IT, Data, Engineering et Finance.
+            </p>
+            <p style="margin-top: 1rem;">
+                J'accompagne des cadres avec plus de 20 ans d'expérience, incluant des Directeurs de grands cabinets 
+                et groupes internationaux, dans leurs processus de recrutement. Mon objectif : contextualiser ces 
+                stratégies pour le marché africain et ouvrir des portes incroyables tant pour les chercheurs d'emploi 
+                que pour les entreprises.
+            </p>
+        </div>
+    </section>
+
+    <!-- Career Timeline -->
+    <section id="timeline" class="container">
+        <h2 class="section-title">Parcours Professionnel</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2018 - 2021</div>
+                    <h3 class="timeline-title">Formation Technique</h3>
+                    <div class="timeline-company">NIIT Pune & ISM Dakar</div>
+                    <p class="timeline-description">
+                        Licence en Administration Réseaux et Systèmes + Informatique Appliquée.
+                        Acquisition de solides bases techniques en networking, systèmes et infrastructure IT.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2021 - 2022</div>
+                    <h3 class="timeline-title">Conseiller Commercial</h3>
+                    <div class="timeline-company">Webhelp & Majorel (Free)</div>
+                    <p class="timeline-description">
+                        Premiers pas dans le monde commercial. Développement de compétences en communication, 
+                        négociation et relation client qui seront essentielles pour ma carrière de recruteur.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">Déc 2022 - Oct 2023</div>
+                    <h3 class="timeline-title">Chargé de Recherche en Recrutement</h3>
+                    <div class="timeline-company">Human Capital Rec</div>
+                    <p class="timeline-description">
+                        Transition vers le recrutement. Spécialisation dans la recherche de profils techniques 
+                        et stratégiques. Découverte de ma passion pour connecter talents et opportunités.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">Oct 2023 - Août 2024</div>
+                    <h3 class="timeline-title">Consultant Recrutement</h3>
+                    <div class="timeline-company">Human Capital Rec (Contract)</div>
+                    <p class="timeline-description">
+                        Recrutement sur des industries technologiques (IT, Data, Engineering) et stratégiques 
+                        (Finance, Transformation digitale) pour de grands cabinets internationaux et startups.
+                    </p>
+                    <ul>
+                        <li>Sourcing et qualification des candidats</li>
+                        <li>Gestion end-to-end du processus de recrutement</li>
+                        <li>Encadrement opérationnel de chargés de recherche</li>
+                        <li>Lead sur un marché spécifique</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">Août 2024 - Présent</div>
+                    <h3 class="timeline-title">Managing Consultant Recrutement</h3>
+                    <div class="timeline-company">Human Capital Rec</div>
+                    <p class="timeline-description">
+                        Poste actuel en remote (Dakar - Paris - Dubai). Gestion complète des opérations 
+                        de recrutement et développement commercial.
+                    </p>
+                    <ul>
+                        <li>Management direct de chercheurs et sourceurs</li>
+                        <li>Account Management & Business Development</li>
+                        <li>Recrutement, onboarding et évaluation selon KPIs définis</li>
+                        <li>Gestion end-to-end des processus de recrutement contingency</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience Highlights -->
+    <section id="experience" class="container">
+        <h2 class="section-title">Expertise & Réalisations</h2>
+        <div class="experience-grid">
+            <div class="experience-card">
+                <h3>🎯 Recrutement International</h3>
+                <div class="company">Marchés Europe, Asie, Amérique</div>
+                <div class="period">2022 - Présent</div>
+                <ul>
+                    <li>Recrutement de profils IT, Data, Engineering pour clients internationaux</li>
+                    <li>Gestion de mandats pour grands cabinets de conseil</li>
+                    <li>Accompagnement de cadres expérimentés (20+ ans)</li>
+                    <li>Expertise marchés : France, UK, Pays-Bas, USA, UAE</li>
+                </ul>
+            </div>
+
+            <div class="experience-card">
+                <h3>👥 Management & Leadership</h3>
+                <div class="company">Human Capital Rec</div>
+                <div class="period">2024 - Présent</div>
+                <ul>
+                    <li>Management d'équipes de researchers et sourcers</li>
+                    <li>Définition et suivi des KPIs</li>
+                    <li>Formation et montée en compétences des équipes</li>
+                    <li>Développement commercial et gestion clients</li>
+                </ul>
+            </div>
+
+            <div class="experience-card">
+                <h3>💡 Innovation & Formation</h3>
+                <div class="company">Initiatives personnelles</div>
+                <div class="period">2024 - Présent</div>
+                <ul>
+                    <li>Formations gratuites : CV ATS-Friendly & Préparation entretiens</li>
+                    <li>Partage d'expertise pour le marché africain</li>
+                    <li>Stratégies de carrière et optimisation de profils</li>
+                    <li>Accompagnement chercheurs d'emploi</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="container">
+        <h2 class="section-title">Projets & Initiatives</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">🎓</div>
+                <div class="project-content">
+                    <h3>Formations Gratuites</h3>
+                    <p>Organisation de formations pour optimiser les carrières : rédaction de CV ATS-Friendly et préparation aux entretiens d'embauche.</p>
+                    <div class="project-tags">
+                        <span class="tag">Formation</span>
+                        <span class="tag">ATS</span>
+                        <span class="tag">Coaching</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🌍</div>
+                <div class="project-content">
+                    <h3>Recrutement International</h3>
+                    <p>Gestion de mandats complexes sur 3 continents pour des profils tech seniors et cadres dirigeants.</p>
+                    <div class="project-tags">
+                        <span class="tag">Executive Search</span>
+                        <span class="tag">International</span>
+                        <span class="tag">Tech</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🚀</div>
+                <div class="project-content">
+                    <h3>Stratégies Marché Africain</h3>
+                    <p>Adaptation des meilleures pratiques internationales pour le marché africain et création de ponts entre talents locaux et opportunités globales.</p>
+                    <div class="project-tags">
+                        <span class="tag">Afrique</span>
+                        <span class="tag">Stratégie</span>
+                        <span class="tag">Talent Acquisition</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="container">
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>🎯 Recrutement</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Headhunting / Chasse de têtes</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Sourcing & Qualification</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Executive Search</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Négociation</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>💻 Technique</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Administration Réseaux</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Systèmes IT</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Compréhension profils IT/Data</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>ATS (Applicant Tracking Systems)</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>👔 Business</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Account Management</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Business Development</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Management d'équipe</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Communication multilingue</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>🌐 Marchés & Industries</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>IT & Engineering</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Data & Analytics</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Finance & Transformation</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Startups & Conseil</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container">
+        <div class="contact-section">
+            <h2 class="section-title">Restons Connectés</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">
+                Vous recherchez un recruteur spécialisé en tech ou souhaitez optimiser votre carrière ?<br>
+                N'hésitez pas à me contacter !
+            </p>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/kana-tsimi-087b87197/" class="contact-link" target="_blank">
+                    💼 LinkedIn
+                </a>
+                <a href="mailto:joelkana0@gmail.com" class="contact-link">
+                    📧 Email
+                </a>
+                <a href="tel:+221XXXXXXXXX" class="contact-link">
+                    📱 Téléphone
+                </a>
+            </div>
+            <p style="margin-top: 2rem; color: var(--text-light); font-style: italic;">
+                "Bridging Technology and Talent - Du câble réseau aux connexions humaines" 🚀
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Joël KANA. Construit avec passion et code.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">
+            De l'Administration Réseau au Recrutement International 🌍
+        </p>
+    </footer>
+
+    <script>
+        // Timeline Animation on Scroll
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        timelineItems.forEach(item => {
+            observer.observe(item);
+        });
+
+        // Skill bars animation
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        const skillObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0%';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Active nav on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.style.opacity = '0.7';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.opacity = '1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
