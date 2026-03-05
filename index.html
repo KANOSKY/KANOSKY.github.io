@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Joël Landry KANA - CV Interactif</title>
+    <title>Joël Landry KANA TSIMI - CV Interactif</title>
     <style>
         * {
             margin: 0;
@@ -12,36 +12,61 @@
         }
 
         :root {
-            --marine-blue: #003d5c;
-            --light-blue: #0066a1;
-            --accent-blue: #00a8e8;
-            --light-bg: #f0f8ff;
-            --white: #ffffff;
-            --text-dark: #2c3e50;
-            --text-light: #6c757d;
+            --bg-dark: #0f0f1e;
+            --bg-darker: #1a1a2e;
+            --bg-card: rgba(26, 26, 46, 0.8);
+            --marine-blue: #0a4d8f;
+            --light-blue: #1e88e5;
+            --accent-blue: #42a5f5;
+            --bright-blue: #64b5f6;
+            --text-light: #e8eaf6;
+            --text-gray: #b0bec5;
+            --text-muted: #78909c;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--light-bg);
+            color: var(--text-light);
+            background: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(30, 136, 229, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(66, 165, 245, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 90%, rgba(10, 77, 143, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, rgba(30, 136, 229, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(30, 136, 229, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
         }
 
         html {
             scroll-behavior: smooth;
         }
 
-        /* Header */
         header {
-            background: linear-gradient(135deg, var(--marine-blue), var(--light-blue));
-            color: var(--white);
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(30, 136, 229, 0.2);
+            color: var(--text-light);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         nav {
@@ -53,57 +78,114 @@
             align-items: center;
         }
 
+        nav .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent-blue), var(--bright-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         nav a {
-            color: var(--white);
+            color: var(--text-gray);
             text-decoration: none;
             margin: 0 1rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width 0.3s;
         }
 
         nav a:hover {
-            color: var(--accent-blue);
+            color: var(--bright-blue);
         }
 
-        /* Hero Section */
+        nav a:hover::after {
+            width: 100%;
+        }
+
         .hero {
-            background: linear-gradient(135deg, var(--marine-blue), var(--light-blue));
-            color: var(--white);
+            background: linear-gradient(135deg, rgba(10, 77, 143, 0.9), rgba(30, 136, 229, 0.9));
+            position: relative;
+            overflow: hidden;
+            color: var(--text-light);
             padding: 150px 2rem 100px;
             text-align: center;
             margin-top: 60px;
         }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%);
+            background-size: 40px 40px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             animation: fadeInDown 1s;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
         }
 
         .hero .tagline {
             font-size: 1.3rem;
-            opacity: 0.9;
+            opacity: 0.95;
             animation: fadeInUp 1s;
             margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .hero .location {
             font-size: 1.1rem;
-            opacity: 0.8;
+            opacity: 0.9;
             margin-top: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Section Titles */
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            color: var(--marine-blue);
+            background: linear-gradient(135deg, var(--bright-blue), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 3rem;
             position: relative;
             padding-bottom: 1rem;
@@ -117,21 +199,27 @@
             transform: translateX(-50%);
             width: 100px;
             height: 4px;
-            background: var(--accent-blue);
+            background: linear-gradient(90deg, var(--marine-blue), var(--accent-blue));
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent-blue);
         }
 
-        /* About Section */
         .about-content {
-            background: var(--white);
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 136, 229, 0.2);
             padding: 3rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             font-size: 1.1rem;
             line-height: 1.8;
-            color: var(--text-dark);
+            color: var(--text-gray);
         }
 
-        /* Timeline */
+        .about-content strong {
+            color: var(--bright-blue);
+        }
+
         .timeline {
             position: relative;
             padding: 2rem 0;
@@ -142,9 +230,10 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 4px;
+            width: 3px;
             height: 100%;
-            background: var(--accent-blue);
+            background: linear-gradient(180deg, var(--marine-blue), var(--accent-blue));
+            box-shadow: 0 0 10px rgba(66, 165, 245, 0.5);
         }
 
         .timeline-item {
@@ -170,11 +259,20 @@
         }
 
         .timeline-content {
-            background: var(--white);
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 136, 229, 0.2);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             position: relative;
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(66, 165, 245, 0.3);
+            border-color: var(--accent-blue);
         }
 
         .timeline-item:nth-child(odd) .timeline-content::before {
@@ -185,7 +283,7 @@
             transform: translateY(-50%);
             width: 0;
             height: 0;
-            border-left: 15px solid var(--white);
+            border-left: 15px solid rgba(26, 26, 46, 0.8);
             border-top: 15px solid transparent;
             border-bottom: 15px solid transparent;
         }
@@ -198,7 +296,7 @@
             transform: translateY(-50%);
             width: 0;
             height: 0;
-            border-right: 15px solid var(--white);
+            border-right: 15px solid rgba(26, 26, 46, 0.8);
             border-top: 15px solid transparent;
             border-bottom: 15px solid transparent;
         }
@@ -207,12 +305,13 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             background: var(--accent-blue);
-            border: 4px solid var(--white);
+            border: 4px solid var(--bg-darker);
             border-radius: 50%;
-            box-shadow: 0 0 0 4px var(--light-blue);
+            box-shadow: 0 0 0 4px rgba(66, 165, 245, 0.3), 0 0 20px var(--accent-blue);
+            z-index: 10;
         }
 
         .timeline-item:nth-child(odd) .timeline-dot,
@@ -222,25 +321,27 @@
 
         .timeline-year {
             font-size: 0.9rem;
-            color: var(--accent-blue);
+            color: var(--bright-blue);
             font-weight: bold;
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .timeline-title {
             font-size: 1.3rem;
-            color: var(--marine-blue);
+            color: var(--text-light);
             margin-bottom: 0.5rem;
         }
 
         .timeline-company {
-            color: var(--light-blue);
+            color: var(--accent-blue);
             font-weight: 600;
             margin-bottom: 1rem;
         }
 
         .timeline-description {
-            color: var(--text-light);
+            color: var(--text-gray);
             line-height: 1.6;
         }
 
@@ -263,55 +364,90 @@
             color: var(--accent-blue);
         }
 
-        /* Experience Cards */
-        .experience-grid {
+        .experience-grid,
+        .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
-        .experience-card {
-            background: var(--white);
+        .experience-card,
+        .project-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 136, 229, 0.2);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        .experience-card:hover {
+        .experience-card::before,
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(66, 165, 245, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .experience-card:hover,
+        .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 61, 92, 0.2);
+            box-shadow: 0 12px 48px rgba(66, 165, 245, 0.3);
+            border-color: var(--accent-blue);
         }
 
-        .experience-card h3 {
-            color: var(--marine-blue);
+        .experience-card:hover::before,
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .experience-card h3,
+        .project-card h3 {
+            color: var(--text-light);
             margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .experience-card .company {
-            color: var(--light-blue);
+        .experience-card .company,
+        .project-card .company {
+            color: var(--accent-blue);
             font-weight: 600;
             margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .experience-card .period {
-            color: var(--accent-blue);
+            color: var(--bright-blue);
             font-size: 0.9rem;
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .experience-card ul {
             list-style: none;
             padding: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .experience-card li {
             padding-left: 1.5rem;
             margin-bottom: 0.5rem;
             position: relative;
-            color: var(--text-light);
+            color: var(--text-gray);
         }
 
         .experience-card li::before {
@@ -321,49 +457,48 @@
             color: var(--accent-blue);
         }
 
-        /* Projects */
         .projects-grid {
-            display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
         }
 
         .project-card {
-            background: var(--white);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 61, 92, 0.2);
+            padding: 0;
         }
 
         .project-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, var(--light-blue), var(--accent-blue));
+            background: linear-gradient(135deg, var(--marine-blue), var(--accent-blue));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: var(--text-light);
             font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px);
         }
 
         .project-content {
             padding: 1.5rem;
-        }
-
-        .project-card h3 {
-            color: var(--marine-blue);
-            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .project-card p {
-            color: var(--text-light);
+            color: var(--text-gray);
             margin-bottom: 1rem;
         }
 
@@ -374,14 +509,14 @@
         }
 
         .tag {
-            background: var(--light-bg);
-            color: var(--marine-blue);
+            background: rgba(66, 165, 245, 0.2);
+            color: var(--bright-blue);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.85rem;
+            border: 1px solid rgba(66, 165, 245, 0.3);
         }
 
-        /* Skills */
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -390,14 +525,23 @@
         }
 
         .skill-category {
-            background: var(--white);
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 136, 229, 0.2);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(66, 165, 245, 0.3);
+            border-color: var(--accent-blue);
         }
 
         .skill-category h3 {
-            color: var(--marine-blue);
+            color: var(--text-light);
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
@@ -412,29 +556,49 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            color: var(--text-gray);
         }
 
         .skill-bar {
-            background: var(--light-bg);
+            background: rgba(30, 136, 229, 0.1);
             height: 8px;
             border-radius: 10px;
             overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .skill-progress {
-            background: linear-gradient(90deg, var(--light-blue), var(--accent-blue));
+            background: linear-gradient(90deg, var(--marine-blue), var(--accent-blue), var(--bright-blue));
             height: 100%;
             border-radius: 10px;
             transition: width 1s ease;
+            box-shadow: 0 0 10px rgba(66, 165, 245, 0.5);
+            position: relative;
         }
 
-        /* Contact */
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
         .contact-section {
-            background: var(--white);
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 136, 229, 0.2);
             padding: 3rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 61, 92, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
 
@@ -450,26 +614,32 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--marine-blue);
+            color: var(--text-gray);
             text-decoration: none;
             font-size: 1.1rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(30, 136, 229, 0.2);
+            background: rgba(26, 26, 46, 0.5);
         }
 
         .contact-link:hover {
-            color: var(--accent-blue);
+            color: var(--bright-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(66, 165, 245, 0.3);
+            border-color: var(--accent-blue);
         }
 
-        /* Footer */
         footer {
-            background: var(--marine-blue);
-            color: var(--white);
+            background: rgba(15, 15, 30, 0.95);
+            border-top: 1px solid rgba(30, 136, 229, 0.2);
+            color: var(--text-gray);
             text-align: center;
             padding: 2rem;
             margin-top: 4rem;
         }
 
-        /* Animations */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -492,7 +662,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -519,19 +688,36 @@
 
             nav {
                 flex-direction: column;
+                gap: 1rem;
             }
 
             nav a {
-                margin: 0.5rem 0;
+                margin: 0.25rem 0.5rem;
             }
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--marine-blue), var(--accent-blue));
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--light-blue), var(--bright-blue));
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <nav>
-            <div>Joël Landry KANA TSIMI</div>
+            <div class="logo">Joël Landry KANA TSIMI</div>
             <div>
                 <a href="#about">À propos</a>
                 <a href="#timeline">Parcours</a>
@@ -543,14 +729,12 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <h1>Joël Landry KANA TSIMI</h1>
         <p class="tagline">International Recruitment | Executive Search | Talent Acquisition</p>
         <p class="location">🌍 Dakar - Paris - Dubai | 🎓 Network Admin ➔ Tech Recruiter</p>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="container">
         <h2 class="section-title">À Propos</h2>
         <div class="about-content">
@@ -572,14 +756,13 @@
         </div>
     </section>
 
-    <!-- Career Timeline -->
     <section id="timeline" class="container">
         <h2 class="section-title">Parcours Professionnel</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div class="timeline-year"></div>
+                    <div class="timeline-year">2018 - 2021</div>
                     <h3 class="timeline-title">Formation Technique</h3>
                     <div class="timeline-company">NIIT Pune & ISM Dakar</div>
                     <p class="timeline-description">
@@ -655,7 +838,6 @@
         </div>
     </section>
 
-    <!-- Work Experience Highlights -->
     <section id="experience" class="container">
         <h2 class="section-title">Expertise & Réalisations</h2>
         <div class="experience-grid">
@@ -697,7 +879,6 @@
         </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects" class="container">
         <h2 class="section-title">Projets & Initiatives</h2>
         <div class="projects-grid">
@@ -742,7 +923,6 @@
         </div>
     </section>
 
-    <!-- Skills -->
     <section id="skills" class="container">
         <h2 class="section-title">Compétences</h2>
         <div class="skills-container">
@@ -908,11 +1088,10 @@
         </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact" class="container">
         <div class="contact-section">
             <h2 class="section-title">Restons Connectés</h2>
-            <p style="color: var(--text-light); margin-bottom: 2rem;">
+            <p style="color: var(--text-gray); margin-bottom: 2rem;">
                 Vous recherchez un recruteur spécialisé en tech ou souhaitez optimiser votre carrière ?<br>
                 N'hésitez pas à me contacter !
             </p>
@@ -921,28 +1100,26 @@
                     💼 LinkedIn
                 </a>
                 <a href="mailto:joelkana0@gmail.com" class="contact-link">
-                    📧 Email
+                    📧 joelkana0@gmail.com
                 </a>
                 <a href="tel:+221XXXXXXXXX" class="contact-link">
                     📱 Téléphone
                 </a>
             </div>
-            <p style="margin-top: 2rem; color: var(--text-light); font-style: italic;">
+            <p style="margin-top: 2rem; color: var(--text-muted); font-style: italic;">
                 "Bridging Technology and Talent - Du câble réseau aux connexions humaines" 🚀
             </p>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Joël KANA. Construit avec passion et code.</p>
+        <p>&copy; 2024 Joël Landry KANA TSIMI. Construit avec passion et code.</p>
         <p style="margin-top: 0.5rem; opacity: 0.8;">
             De l'Administration Réseau au Recrutement International 🌍
         </p>
     </footer>
 
     <script>
-        // Timeline Animation on Scroll
         const timelineItems = document.querySelectorAll('.timeline-item');
         
         const observerOptions = {
@@ -962,7 +1139,6 @@
             observer.observe(item);
         });
 
-        // Skill bars animation
         const skillBars = document.querySelectorAll('.skill-progress');
         
         const skillObserver = new IntersectionObserver(function(entries) {
@@ -981,7 +1157,6 @@
             skillObserver.observe(bar);
         });
 
-        // Smooth scroll for navigation
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -990,7 +1165,6 @@
             });
         });
 
-        // Active nav on scroll
         window.addEventListener('scroll', () => {
             let current = '';
             const sections = document.querySelectorAll('section[id]');
@@ -1012,5 +1186,3 @@
     </script>
 </body>
 </html>
-
-
